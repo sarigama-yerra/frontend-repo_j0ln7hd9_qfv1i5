@@ -1,36 +1,29 @@
 import React from 'react'
+import { motion } from 'framer-motion'
+import { Cpu, Bot, Database, Cloud, Palette, Workflow } from 'lucide-react'
 
-const groups = [
-  {
-    title: 'Backend & Architecture',
-    items: ['NodeJS, TypeScript, NestJS', 'Postgres, Redis, pgvector', 'Microservices, event-driven', 'Domain-driven design', 'Clean architecture'],
-  },
-  {
-    title: 'AI & Agent Systems',
-    items: ['LLM orchestration', 'Embeddings & vector search', 'RAG pipelines', 'Autonomous agents', 'Agent graphs, routing, guardrails, memory'],
-  },
-  {
-    title: 'Product & Full-Cycle Delivery',
-    items: ['UX flows', 'IA documentation', 'System design', 'CI/CD', 'Cloud infra', 'Testing & observability'],
-  },
-  {
-    title: 'Frontend',
-    items: ['Next.js', 'React', 'Tailwind', 'Figma-ready workflows'],
-  },
+const tiles = [
+  { title: 'Backend & Architecture', icon: Cpu },
+  { title: 'AI & Agents', icon: Bot },
+  { title: 'Vector Search', icon: Database },
+  { title: 'DevOps & Infra', icon: Cloud },
+  { title: 'UX & Product', icon: Palette },
+  { title: 'Full-cycle Delivery', icon: Workflow },
 ]
 
-const SkillBlock = ({ title, items }) => (
-  <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-white">
-    <h3 className="text-lg font-semibold tracking-tight">{title}</h3>
-    <ul className="mt-4 space-y-2 text-sm text-white/80">
-      {items.map((i) => (
-        <li key={i} className="flex gap-2">
-          <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-white/70" />
-          <span>{i}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
+const Tile = ({ title, Icon, i }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 0.5, delay: i * 0.08 }}
+    className="group flex items-center gap-3 rounded-2xl border border-sky-400/20 bg-white/[0.03] p-4 text-white shadow-[0_10px_30px_rgba(2,6,23,0.4)] backdrop-blur-md"
+  >
+    <div className="rounded-xl border border-sky-400/30 bg-sky-400/10 p-2 text-sky-300 transition group-hover:shadow-[0_0_30px_rgba(56,189,248,0.3)]">
+      <Icon className="h-5 w-5" />
+    </div>
+    <div className="text-sm font-medium text-white/90">{title}</div>
+  </motion.div>
 )
 
 const Skills = () => {
@@ -38,9 +31,9 @@ const Skills = () => {
     <section id="skills" className="relative w-full bg-[#0b1326] py-20">
       <div className="relative mx-auto max-w-6xl px-6 sm:px-8 lg:px-12">
         <h2 className="mb-8 text-2xl font-semibold tracking-tight text-white sm:text-3xl">Skill Matrix</h2>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {groups.map((g) => (
-            <SkillBlock key={g.title} title={g.title} items={g.items} />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {tiles.map((t, i) => (
+            <Tile key={t.title} title={t.title} Icon={t.icon} i={i} />
           ))}
         </div>
       </div>

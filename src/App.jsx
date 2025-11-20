@@ -5,6 +5,7 @@ import Projects from './components/Projects'
 import Skills from './components/Skills'
 import OpenSource from './components/OpenSource'
 import CaseStudies from './components/CaseStudies'
+import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
@@ -17,7 +18,7 @@ function App() {
       <Skills />
       <OpenSource />
       <CaseStudies />
-      {/* Testimonials placeholder */}
+      <Testimonials />
       <Contact />
       <Footer />
     </div>

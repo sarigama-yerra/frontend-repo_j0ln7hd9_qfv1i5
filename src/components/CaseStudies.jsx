@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 const sample = [
   {
@@ -15,15 +16,21 @@ const sample = [
   },
 ]
 
-const CaseCard = ({ c }) => (
-  <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-white">
+const CaseCard = ({ c, i }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ duration: 0.5, delay: i * 0.06 }}
+    className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-6 text-white shadow-[0_10px_30px_rgba(2,6,23,0.5)]"
+  >
     <h3 className="text-lg font-semibold">{c.title}</h3>
     <div className="mt-4 grid gap-2 text-sm text-white/80">
       <div><span className="font-semibold text-white">Problem:</span> {c.problem}</div>
       <div><span className="font-semibold text-white">Technical decisions:</span> {c.decisions}</div>
       <div><span className="font-semibold text-white">Results:</span> {c.results}</div>
     </div>
-  </div>
+  </motion.div>
 )
 
 const CaseStudies = () => {
@@ -32,8 +39,8 @@ const CaseStudies = () => {
       <div className="mx-auto max-w-6xl px-6 sm:px-8 lg:px-12">
         <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">Case Studies</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
-          {sample.map((c) => (
-            <CaseCard key={c.title} c={c} />
+          {sample.map((c, i) => (
+            <CaseCard key={c.title} c={c} i={i} />
           ))}
         </div>
       </div>
